@@ -160,7 +160,7 @@ internal static unsafe class MultiMode
         {
             if(EzThrottler.Throttle("MultiNotify", 15000)) Utils.NotifyIfLifestreamIsNotInstalled("Multi Mode");
             ValidateAutoAfkSettings();
-            var shouldDisableRender = C.MultiDisableRender && (!C.MultiDisableRenderNightModeOnly || C.NightMode) && (!C.MultiDisableRenderOnlyInactive || TerraFX.Interop.Windows.Windows.IsIconic((TerraFX.Interop.Windows.HWND)(*ECommonsMain.MainWindowHandle)) || CSFramework.Instance()->WindowInactive);
+            var shouldDisableRender = C.MultiDisableRender && (!C.MultiDisableRenderNightModeOnly || C.NightMode) && (!C.MultiDisableRenderOnlyInactive || false /* api12: ECommonsMain.MainWindowHandle unavailable (B1 minimized-window check) */ || CSFramework.Instance()->WindowInactive);
             if(shouldDisableRender)
             {
                 RenderDisableManager.PlaceRequest();

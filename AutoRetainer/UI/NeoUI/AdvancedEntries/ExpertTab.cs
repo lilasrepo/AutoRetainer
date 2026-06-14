@@ -42,14 +42,15 @@ public class ExpertTab : NeoUIEntry
         {
             if(ImGui.Checkbox(x, ref C.MarketCooldownOverlay))
             {
-                if(C.MarketCooldownOverlay)
-                {
-                    P.Memory.OnReceiveMarketPricePacketHook?.Enable();
-                }
-                else
-                {
-                    P.Memory.OnReceiveMarketPricePacketHook?.Disable();
-                }
+                // TODO(api12): B1 MarketCooldownOverlay hook disabled (ECommons-HEAD/game-7.5 packet hook).
+                //if(C.MarketCooldownOverlay)
+                //{
+                //    P.Memory.OnReceiveMarketPricePacketHook?.Enable();
+                //}
+                //else
+                //{
+                //    P.Memory.OnReceiveMarketPricePacketHook?.Disable();
+                //}
             }
         })
 

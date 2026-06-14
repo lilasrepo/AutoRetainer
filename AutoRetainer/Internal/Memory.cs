@@ -23,8 +23,9 @@ internal unsafe class Memory : IDisposable
     [Signature("48 89 5C 24 ?? 57 48 83 EC 20 8B D9 8B F9")]
     private GetIsGatheringItemGatheredDelegate GetIsGatheringItemGathered;
 
-    [EzHookFromCS(false)]
-    internal EzHook<PacketDispatcher.Delegates.HandleMarketBoardItemRequestStartPacket> OnReceiveMarketPricePacketHook;
+    // TODO(api12): MarketCooldownOverlay packet hook B1-stubbed — [EzHookFromCS] is ECommons-HEAD-only and PacketDispatcher.Delegates.HandleMarketBoardItemRequestStartPacket is game-7.5 CS.
+    //[EzHookFromCS(false)]
+    //internal EzHook<PacketDispatcher.Delegates.HandleMarketBoardItemRequestStartPacket> OnReceiveMarketPricePacketHook;
 
     internal delegate byte OutdoorTerritory_IsEstateResidentDelegate(nint a1, byte a2);
     [Signature("8B 05 ?? ?? ?? ?? 44 0F B6 D2 44 8B 81")]
@@ -45,9 +46,10 @@ internal unsafe class Memory : IDisposable
     {
         Svc.Hook.InitializeFromAttributes(this);
         EzSignatureHelper.Initialize(this);
-        if(C.MarketCooldownOverlay) OnReceiveMarketPricePacketHook?.Enable();
+        //if(C.MarketCooldownOverlay) OnReceiveMarketPricePacketHook?.Enable(); // TODO(api12): B1 MarketCooldownOverlay
         ReceiveRetainerVentureListUpdateHook?.Enable();
-        RetainerItemCommandHook = new("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 5C 24 ?? 41 8B F0", RetainerItemCommandDetour, false);
+        // C-fix: game-7.1 sig from JP c8fca6d "7.1" commit (HEAD tail '48 8B 5C 24 ?? 41 8B F0' drifted; 7.1 = '48 8B 6C 24').
+        RetainerItemCommandHook = new("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 6C 24", RetainerItemCommandDetour, false);
     }
 
     internal void RetainerItemCommandDetour(nint AgentRetainerItemCommandModule, uint slot, InventoryType inventoryType, uint a4, RetainerItemCommand command)
@@ -75,11 +77,12 @@ internal unsafe class Memory : IDisposable
         return ret;
     }
 
-    private void OnReceiveMarketPricePacketDetour(uint a1, nint data)
-    {
-        OnReceiveMarketPricePacketHook.Original(a1, data);
-        P.MarketCooldownOverlay.UnlockAt = Environment.TickCount64 + 2000;
-    }
+    // TODO(api12): B1 MarketCooldownOverlay detour disabled with its hook.
+    //private void OnReceiveMarketPricePacketDetour(uint a1, nint data)
+    //{
+    //    OnReceiveMarketPricePacketHook.Original(a1, data);
+    //    P.MarketCooldownOverlay.UnlockAt = Environment.TickCount64 + 2000;
+    //}
 
     public void Dispose()
     {

@@ -1,4 +1,4 @@
-﻿using AutoRetainerAPI.Configuration;
+using AutoRetainerAPI.Configuration;
 using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
@@ -215,7 +215,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                 var cont = plan.Items.Select(s => s.ItemID).ToArray();
                 if(ThreadLoadImageHandler.TryGetIconTextureWrap(x.Value.Data.Icon, false, out var t))
                 {
-                    ImGui.Image(t.Handle, new(ImGui.GetTextLineHeight()));
+                    ImGui.Image(t.ImGuiHandle, new(ImGui.GetTextLineHeight()));
                     ImGui.SameLine();
                 }
                 if(ImGui.Selectable(x.Value.Data.GetName() + $"##{x.Key}", cont.Contains(x.Key), ImGuiSelectableFlags.DontClosePopups))
@@ -321,7 +321,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                 ImGui.TableNextColumn();
                 if(ThreadLoadImageHandler.TryGetIconTextureWrap(meta.Data.Icon, false, out var t))
                 {
-                    ImGui.Image(t.Handle, new(ImGui.GetFrameHeight()));
+                    ImGui.Image(t.ImGuiHandle, new(ImGui.GetFrameHeight()));
                     ImGui.SameLine();
                 }
                 ImGuiEx.TextV($"{meta.Data.Name.GetText()}");
@@ -332,7 +332,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                     {
                         var trans = !meta.Companies.Contains(c);
                         if(trans) ImGui.PushStyleVar(ImGuiStyleVar.Alpha, 0.2f);
-                        ImGui.Image(ctex.Handle, new(ImGui.GetFrameHeight()));
+                        ImGui.Image(ctex.ImGuiHandle, new(ImGui.GetFrameHeight()));
                         if(trans) ImGui.PopStyleVar();
                         ImGuiEx.Tooltip($"{c}" + (trans ? " (unavailable)" : ""));
                         ImGui.SameLine(0, 1);
@@ -343,7 +343,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                 ImGui.TableNextColumn();
                 if(Svc.Data.GetExcelSheet<GrandCompanyRank>().TryGetRow(meta.MinPurchaseRank, out var rank) && ThreadLoadImageHandler.TryGetIconTextureWrap(rank.IconFlames, false, out var tex))
                 {
-                    ImGui.Image(tex.Handle, new(ImGui.GetFrameHeight()));
+                    ImGui.Image(tex.ImGuiHandle, new(ImGui.GetFrameHeight()));
                     var rankName = Utils.GCRanks[meta.MinPurchaseRank];
                     ImGuiEx.Tooltip(rankName);
                     if(ImGuiEx.HoveredAndClicked()) getFilter() = rankName;

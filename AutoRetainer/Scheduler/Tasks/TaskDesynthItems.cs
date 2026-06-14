@@ -6,7 +6,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.Interop;
-using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.AtkValueType;
+using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.ValueType;
 
 namespace AutoRetainer.Scheduler.Tasks;
 public static unsafe class TaskDesynthItems

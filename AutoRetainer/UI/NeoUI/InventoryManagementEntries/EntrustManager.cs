@@ -1,4 +1,4 @@
-﻿using AutoRetainerAPI.Configuration;
+using AutoRetainerAPI.Configuration;
 using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.Reflection;
@@ -107,7 +107,7 @@ public class EntrustManager : InventoryManagementBase
                         ImGui.TableNextColumn();
                         if(ThreadLoadImageHandler.TryGetIconTextureWrap(x.Icon, true, out var icon))
                         {
-                            ImGui.Image(icon.Handle, new(ImGui.GetFrameHeight()));
+                            ImGui.Image(icon.ImGuiHandle, new(ImGui.GetFrameHeight()));
                         }
                         ImGui.TableNextColumn();
                         if(ImGui.Checkbox(x.Name.ToString(), ref contains))

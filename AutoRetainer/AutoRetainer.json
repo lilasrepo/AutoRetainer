@@ -1,4 +1,4 @@
-﻿{
+{
   "Author": "NightmareXIV, kawaii",
   "Name": "AutoRetainer",
   "InternalName": "AutoRetainer",
@@ -6,7 +6,7 @@
   "Description": "Collect and assign ventures to your retainers from the comfort of your bed.",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/PunishXIV/AutoRetainer",
-  "DalamudApiLevel": 15,
+  "DalamudApiLevel": 12,
   "LoadPriority": 0,
   "IconUrl": "https://s3.puni.sh/media/plugin/24/icon-drb6aywk5m9.png"
 }

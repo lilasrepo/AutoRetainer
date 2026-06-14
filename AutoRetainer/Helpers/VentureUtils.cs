@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Internal;
+using AutoRetainer.Internal;
 using AutoRetainer.Scheduler.Tasks;
 using AutoRetainerAPI.Configuration;
 using Dalamud.Memory;
@@ -484,9 +484,9 @@ internal static unsafe class VentureUtils
         {
             for(var i = 0; i < data->AtkArrayData.Size; i++)
             {
-                if(data->StringArray[i].Value == null) break;
+                if(data->StringArray[i] == null) break;
                 if(i % 4 != 1) continue;
-                var item = data->StringArray[i].Value;
+                var item = data->StringArray[i];
                 if(item != null)
                 {
                     var str = MemoryHelper.ReadSeStringNullTerminated((nint)item);

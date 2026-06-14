@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Addon.Lifecycle;
+using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Hooking;
@@ -10,14 +10,15 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel.Sheets;
-using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.AtkValueType;
+using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.ValueType;
 
 namespace AutoRetainer.Modules;
 #pragma warning disable CS0649
 public unsafe class QuickSellItems : IDisposable
 {
     //TODO: just remake this
-    [Signature("83 B9 ?? ?? ?? ?? ?? 7E 11 39 91", DetourName = nameof(OpenInventoryContextDetour), Fallibility = Fallibility.Fallible)]
+    // C-fix: game-7.1 sig from JP c8fca6d "7.1" commit (HEAD trailing '39 91' drifted; 7.1 ends '7E 11').
+    [Signature("83 B9 ?? ?? ?? ?? ?? 7E 11", DetourName = nameof(OpenInventoryContextDetour), Fallibility = Fallibility.Fallible)]
     internal Hook<AgentInventoryContext.Delegates.OpenForItemSlot> openInventoryContextHook;
 
     public InventoryType[] CanSellFrom = [
@@ -114,7 +115,7 @@ public unsafe class QuickSellItems : IDisposable
 
     private void OpenInventoryContextDetour(AgentInventoryContext* agent, InventoryType inventoryType, int slot, int a4, uint a5)
     {
-        openInventoryContextHook.Original(agent, inventoryType, slot, a4, a5);
+        openInventoryContextHook.Original(agent, (uint)inventoryType, slot, a4, a5);
         InternalLog.Verbose($"Inventory hook: {inventoryType}, {slot}");
         try
         {

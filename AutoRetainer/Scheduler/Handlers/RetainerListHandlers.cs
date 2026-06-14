@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Internal.InventoryManagement;
+using AutoRetainer.Internal.InventoryManagement;
 using AutoRetainer.Scheduler.Tasks;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -45,7 +45,7 @@ internal static unsafe class RetainerListHandlers
                 {
                     new()
                     {
-                        Type = AtkValueType.Int,
+                        Type = FFXIVClientStructs.FFXIV.Component.GUI.ValueType.Int,
                         Int = -1
                     }
                 };

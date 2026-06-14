@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Scheduler.Handlers;
+using AutoRetainer.Scheduler.Handlers;
 using AutoRetainer.Scheduler.Tasks;
 using Dalamud.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI;
@@ -57,7 +57,7 @@ internal unsafe class DebugVenture : DebugSectionBase
             {
                 for(var i = 0; i < data->AtkArrayData.Size; i++)
                 {
-                    var item = data->StringArray[i].Value;
+                    var item = data->StringArray[i];
                     if(item != null)
                     {
                         var str = MemoryHelper.ReadSeStringNullTerminated((nint)item);

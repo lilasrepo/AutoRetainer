@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Modules.Voyage;
+using AutoRetainer.Modules.Voyage;
 using AutoRetainer.Scheduler.Tasks;
 using Dalamud.Utility;
 using ECommons.Configuration;
@@ -46,11 +46,11 @@ internal unsafe class DebugMisc : DebugSectionBase
         {
             ImGuiEx.Text($"""
                 Current character: 
-                SentVentures: {Data?.SentVenturesByDay.Sum(x => x.Value)}
-                SentVoyages: {Data?.SentVoyagesByDay.Sum(x => x.Value)}
+                SentVentures: {Data?.SentVenturesByDay.Sum(x => (long)x.Value)}
+                SentVoyages: {Data?.SentVoyagesByDay.Sum(x => (long)x.Value)}
                 Max enabled retainers: {Data?.GetEnabledRetainers(false).Length}
-                SentVentures all: {C.OfflineData.Sum(x => x.SentVenturesByDay.Select(x => x.Value).Sum())}
-                SentVoyages all: {C.OfflineData.Sum(x => x.SentVoyagesByDay.Select(x => x.Value).Sum())}
+                SentVentures all: {C.OfflineData.Sum(x => x.SentVenturesByDay.Select(x => (long)x.Value).Sum())}
+                SentVoyages all: {C.OfflineData.Sum(x => x.SentVoyagesByDay.Select(x => (long)x.Value).Sum())}
                 Max enabled retainers global: {C.OfflineData.Select(x => x.GetEnabledRetainers().Length).MaxSafe()}
                 Characters with enabled retainers: {C.OfflineData.Where(x => x.GetEnabledRetainers().Length > 0 && x.Enabled).Count()}
                 Characters with enabled submarines: {C.OfflineData.Where(x => x.GetEnabledVesselsData(Internal.VoyageType.Submersible).Count > 0 && x.WorkshopEnabled).Count()}
@@ -61,7 +61,7 @@ internal unsafe class DebugMisc : DebugSectionBase
             ImGui.Indent();
             foreach(var x in days)
             {
-                ImGuiEx.Text($"{x}: SentVentures: {C.OfflineData.Select(c => c.SentVenturesByDay.SafeSelect(x)).Sum()},  SentVoyages: {C.OfflineData.Select(c => c.SentVoyagesByDay.SafeSelect(x)).Sum()}");
+                ImGuiEx.Text($"{x}: SentVentures: {C.OfflineData.Select(c => (long)c.SentVenturesByDay.SafeSelect(x)).Sum()},  SentVoyages: {C.OfflineData.Select(c => (long)c.SentVoyagesByDay.SafeSelect(x)).Sum()}");
             }
             ImGui.Unindent();
             ImGuiEx.Text($"""

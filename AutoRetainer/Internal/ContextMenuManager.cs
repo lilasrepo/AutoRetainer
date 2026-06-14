@@ -27,7 +27,10 @@ internal unsafe class ContextMenuManager
         if(!Data.GetIMSettings().IMEnableContextMenu) return;
         if(args.MenuType == ContextMenuType.Inventory && args.Target is MenuTargetInventory inv && inv.TargetItem != null)
         {
-            if(ItemUtil.GetBaseId(inv.TargetItem.Value.ItemId) is { ItemId: > 0 and var id, Kind: not ItemKind.EventItem })
+            // api12: Dalamud ItemUtil.GetBaseId / ItemKind are API15-only — strip HQ flag + exclude event items inline.
+            var rawItemId = inv.TargetItem.Value.ItemId;
+            var id = (rawItemId >= 1000000u && rawItemId < 2000000u) ? rawItemId - 1000000u : rawItemId;
+            if(id > 0u && id < 2000000u)
             {
                 if(Data.GetIMSettings(true).IMProtectList.Contains(id))
                 {

@@ -1,4 +1,4 @@
-﻿using ECommons.Automation.NeoTaskManager.Tasks;
+using ECommons.Automation.NeoTaskManager.Tasks;
 using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using ECommons.Singletons;
@@ -44,7 +44,7 @@ public static unsafe class TaskDeliverItems
         {
             if(C.FullAutoGCDeliveryUseBuffItem)
             {
-                if(Player.Object.IsCasting(14946, ActionType.Item))
+                if(Player.Object.IsCasting(14946, (uint)ActionType.Item))
                 {
                     UsingItemBuff = true;
                     return true;
@@ -91,7 +91,7 @@ public static unsafe class TaskDeliverItems
                 _ => throw new ArgumentOutOfRangeException()
             }), "Teleport to GC");
         }
-        P.TaskManager.Enqueue(() => !Lifestream.IsBusy(), "Wait until teleportation completed", new(timeLimitMS: 5 * 60 * 1000) { CompanionAction = _ => EzThrottler.Throttle("GcBusy", 60000, true)});
+        P.TaskManager.Enqueue(() => !Lifestream.IsBusy(), "Wait until teleportation completed", new(timeLimitMS: 5 * 60 * 1000));
         P.TaskManager.Enqueue(() => GCContinuation.EnqueueInitiation(true), "Initiate GC delivery");
         return true;
     }

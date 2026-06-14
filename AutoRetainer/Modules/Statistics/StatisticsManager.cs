@@ -1,5 +1,4 @@
 ﻿using AutoRetainer.Internal.InventoryManagement;
-using Dalamud.Game.Chat;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
@@ -17,9 +16,9 @@ internal static unsafe class StatisticsManager
         Svc.ClientState.TerritoryChanged += ClientState_TerritoryChanged;
     }
 
-    private static void Chat_ChatMessage(IHandleableChatMessage message)
+    private static void Chat_ChatMessage(XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled)
     {
-        Chat_ChatMessage(message.Type, message.Message);
+        Chat_ChatMessage(type, message);
     }
 
     internal static void Shutdown()
@@ -29,7 +28,7 @@ internal static unsafe class StatisticsManager
         Files.Clear();
     }
 
-    private static void ClientState_TerritoryChanged(uint e)
+    private static void ClientState_TerritoryChanged(ushort e)
     {
         Files.Clear();
         OfflineDataManager.EnqueueWriteWhenPlayerAvailable();

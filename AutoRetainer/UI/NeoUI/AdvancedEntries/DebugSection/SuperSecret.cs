@@ -1,4 +1,4 @@
-﻿using Dalamud.Interface.Components;
+using Dalamud.Interface.Components;
 
 namespace AutoRetainer.UI.NeoUI.AdvancedEntries.DebugSection;
 
@@ -20,6 +20,6 @@ internal class SuperSecret : DebugSectionBase
         var g = Safety.Get();
         ImGuiEx.Text(g ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, $"Safety flag: {(g ? "Present" : "Absent")}");
         ImGui.Separator();
-        ImGuiEx.Checkbox("Ignore GC rank check for MM delivery", ref C.IgnoreGCRankCheck);
+        ImGui.Checkbox("Ignore GC rank check for MM delivery", ref C.IgnoreGCRankCheck);
     }
 }

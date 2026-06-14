@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Modules.Voyage;
+using AutoRetainer.Modules.Voyage;
 
 using Dalamud.Game.ClientState.Conditions;
 using ECommons.Throttlers;
@@ -78,7 +78,7 @@ internal static unsafe class MiniTA
     {
         var addon = Svc.GameGui.GetAddonByName("SelectString", 1);
         if(addon == IntPtr.Zero) return;
-        var selectStrAddon = (AddonSelectString*)addon.Address;
+        var selectStrAddon = (AddonSelectString*)addon;
         if(!IsAddonReady(&selectStrAddon->AtkUnitBase))
         {
             return;

@@ -4,7 +4,7 @@ using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel.Sheets;
-using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.AtkValueType;
+using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.ValueType;
 
 namespace AutoRetainer.Modules.Voyage.PartSwapper;
 public static unsafe class PartSwapperTasks
