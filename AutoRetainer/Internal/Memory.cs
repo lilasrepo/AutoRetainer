@@ -49,7 +49,7 @@ internal unsafe class Memory : IDisposable
         //if(C.MarketCooldownOverlay) OnReceiveMarketPricePacketHook?.Enable(); // TODO(api12): B1 MarketCooldownOverlay
         ReceiveRetainerVentureListUpdateHook?.Enable();
         // C-fix: game-7.1 sig from JP c8fca6d "7.1" commit (HEAD tail '48 8B 5C 24 ?? 41 8B F0' drifted; 7.1 = '48 8B 6C 24').
-        RetainerItemCommandHook = new("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 6C 24", RetainerItemCommandDetour, false);
+        RetainerItemCommandHook = new("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 5C 24 ?? 41 8B F0", RetainerItemCommandDetour, false);
     }
 
     internal void RetainerItemCommandDetour(nint AgentRetainerItemCommandModule, uint slot, InventoryType inventoryType, uint a4, RetainerItemCommand command)

@@ -115,7 +115,7 @@ public unsafe class QuickSellItems : IDisposable
 
     private void OpenInventoryContextDetour(AgentInventoryContext* agent, InventoryType inventoryType, int slot, int a4, uint a5)
     {
-        openInventoryContextHook.Original(agent, (uint)inventoryType, slot, a4, a5);
+        openInventoryContextHook.Original(agent, inventoryType, slot, a4, a5);
         InternalLog.Verbose($"Inventory hook: {inventoryType}, {slot}");
         try
         {
