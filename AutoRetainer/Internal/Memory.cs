@@ -48,7 +48,9 @@ internal unsafe class Memory : IDisposable
         EzSignatureHelper.Initialize(this);
         //if(C.MarketCooldownOverlay) OnReceiveMarketPricePacketHook?.Enable(); // TODO(api12): B1 MarketCooldownOverlay
         ReceiveRetainerVentureListUpdateHook?.Enable();
-        // C-fix: game-7.1 sig from JP c8fca6d "7.1" commit (HEAD tail '48 8B 5C 24 ?? 41 8B F0' drifted; 7.1 = '48 8B 6C 24').
+        // C-fix(7.3): advanced 2026-07-28 from the old game-7.1 tail to PunishXIV f71d815 (7.3).
+        // As of this refresh upstream carries the IDENTICAL string, so the sig no longer diverges;
+        // what is still TC-side is the `false` third argument (do not auto-enable the hook).
         RetainerItemCommandHook = new("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 5C 24 ?? 41 8B F0", RetainerItemCommandDetour, false);
     }
 
